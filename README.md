@@ -1,7 +1,3 @@
-Certainly! Here’s a polished README draft for your Catena repository, incorporating your provided descriptions and adding a simple illustration for getting started:
-
----
-
 # Catena  
 🔐 Secure Messaging API with FastAPI
 
