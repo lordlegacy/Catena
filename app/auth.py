@@ -6,8 +6,11 @@ from datetime import datetime, timedelta
 from typing import Optional
 from app.db import get_user
 import os
+from dotenv import load_dotenv 
 
-SECRET_KEY = "supersecretkey"
+
+load_dotenv()
+SECRET_KEY = os.getenv('KEY')
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
