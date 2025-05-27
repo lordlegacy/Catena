@@ -1,116 +1,78 @@
-# Catena
-# 🔐 Secure Messaging API with FastAPI
-
-A simple secure messaging backend built with **FastAPI**. This app allows users to register, authenticate, and securely send encrypted messages using RSA public-key cryptography.
+Certainly! Here’s a polished README draft for your Catena repository, incorporating your provided descriptions and adding a simple illustration for getting started:
 
 ---
 
-## 🚀 Features
+# Catena  
+🔐 Secure Messaging API with FastAPI
 
-- User Registration & Login
-- JWT Token Authentication
-- Per-user RSA Keypair Generation
-- Password-Protected Private Key Storage
-- Public Key Encryption
-- Secure Message Decryption
-- SQLite Database for User Storage
-- Auto-generated Swagger Docs
+**Purpose of the Repository**  
+Catena is a secure messaging backend built with FastAPI, designed with privacy and encryption at its core. It allows users to register, authenticate, and exchange encrypted messages using RSA public-key cryptography. The project is ideal for educational use and prototyping secure messaging systems.  
 
----
 
-## 📦 Tech Stack
+**Features and Technologies**  
+- User registration and login  
+- JWT token authentication  
+- Per-user RSA keypair generation  
+- Password-protected private key storage  
+- Public key encryption and secure message decryption  
+- SQLite database for user management  
+- Auto-generated Swagger API documentation
 
-| Component             | Description                                           |
-|-----------------------|-------------------------------------------------------|
-| **FastAPI**           | High-performance Python web framework for APIs       |
-| **SQLite**            | Lightweight relational database                      |
-| **RSA (Cryptography)**| For public-key encryption/decryption                 |
-| **JWT (`python-jose`)**| Secure token-based user authentication             |
-| **Passlib (bcrypt)**  | Password hashing and verification                    |
-
----
-
-## 🔧 How It Works
-
-### ✅ 1. User Registration (`/register`)
-- User submits `username` and `password`
-- Password is hashed with bcrypt
-- RSA keypair is generated per user
-- Private key is encrypted using the user’s password
-- Public key is stored in plain text
-- Encrypted private key is stored in the database
-
-### 🔐 2. User Login (`/login`)
-- User submits their credentials
-- If valid, a **JWT access token** is returned
-- Token is used for protected requests
-
-### ✉️ 3. Encrypt a Message (`/encrypt`)
-- Authenticated user specifies:
-  - `recipient_username`
-  - `message`
-- Server encrypts message using recipient’s public key
-- Returns `encrypted_message` (base64 string)
-
-### 🔓 4. Decrypt a Message (`/decrypt`)
-- Authenticated user submits:
-  - `encrypted_message`
-  - `password`
-- Server:
-  - Decrypts private key using password
-  - Uses private key to decrypt the message
-- Returns the original message
+**Tech Stack:**  
+- **FastAPI:** High-performance Python web framework for APIs  
+- **SQLite:** Lightweight relational database  
+- **RSA (Cryptography):** Public-key encryption/decryption  
+- **python-jose:** JWT token authentication  
+- **Passlib (bcrypt):** Password hashing and verification
 
 ---
 
-## 📘 API Documentation
+## 🚀 How to Use
 
-FastAPI provides interactive documentation:
-- Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)
+Here’s a simple step-by-step illustration of using the Catena API:
+
+1. **Register a User**  
+   `POST /register`  
+   ```json
+   { "username": "alice", "password": "mypassword" }
+   ```
+
+2. **Login**  
+   `POST /login` (form data)  
+   ```
+   username=alice
+   password=mypassword
+   ```
+   - Receive a JWT access token.
+
+3. **Encrypt a Message**  
+   `POST /encrypt` (use your JWT token)  
+   ```json
+   {
+     "recipient_username": "bob",
+     "message": "Hello Bob!"
+   }
+   ```
+   - Returns an encrypted message (base64 string).
+
+4. **Decrypt a Message**  
+   `POST /decrypt` (use your JWT token)  
+   ```json
+   {
+     "encrypted_message": "base64_encrypted_text",
+     "password": "mypassword"
+   }
+   ```
+   - Returns the original (decrypted) message.
+
+Explore interactive API docs at:  
+- Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)  
 - ReDoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
 ---
 
-## ✅ Example Routes
-
-### `POST /register`
-```json
-{ "username": "alice", "password": "mypassword" }
-```
-
-### `POST /login`
-**Form data:**
-```
-username=alice
-password=mypassword
-```
-
-### `POST /encrypt`
-```json
-{
-  "recipient_username": "bob",
-  "message": "Hello Bob!"
-}
-```
-
-### `POST /decrypt`
-```json
-{
-  "encrypted_message": "base64_encrypted_text",
-  "password": "mypassword"
-}
-```
+**Built for educational and prototyping purposes.**
 
 ---
 
-## 📂 Future Ideas
-
-- File encryption support
-- Shared inbox or message store
-- Expiring messages
-- Frontend integration
-
----
-
-Built for educational and prototyping purposes.
-
+Let me know if you’d like to include more details or a diagram!
